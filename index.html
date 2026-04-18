@@ -158,25 +158,38 @@ section { position: relative; z-index: 1; padding: clamp(3rem, 6vw, 5rem) clamp(
 }
 
 /* ABOUT */
-#about { background: var(--navy2); border-top: 1px solid var(--dim); border-bottom: 1px solid var(--dim); }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; max-width: 1000px; }
-.about-panel {
-  background: var(--navy3);
-  border: 1px solid var(--dim);
-  border-radius: var(--r);
-  aspect-ratio: 4/3;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
+#about {
+  background: var(--navy2);
+  border-top: 1px solid var(--dim);
+  border-bottom: 1px solid var(--dim);
 }
-.about-panel::before {
+.about-text {
+  max-width: 720px;
+  position: relative;
+}
+.about-text::before {
   content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(circle at 30% 40%, rgba(32,160,224,0.15), transparent 60%),
-    radial-gradient(circle at 70% 70%, rgba(64,192,160,0.12), transparent 50%);
+  display: block;
+  width: 48px; height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--blue));
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
 }
-.about-panel-logo { height: 72px; width: auto; opacity: 0.6; position: relative; z-index: 1; filter: brightness(0) invert(1); }
-.about-text p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.85rem; line-height: 1.85; }
+.about-text p {
+  font-size: 1rem; color: var(--muted);
+  margin-bottom: 1rem; line-height: 2;
+}
+.about-quote {
+  border-left: 2px solid var(--teal);
+  padding: 1rem 1.5rem;
+  margin: 1.75rem 0;
+  background: rgba(64,192,160,0.04);
+  border-radius: 0 var(--rs) var(--rs) 0;
+  font-size: 1.05rem;
+  color: var(--white);
+  line-height: 1.8;
+  font-style: italic;
+}
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.25rem; }
 .chip {
   font-family: 'Space Mono', monospace;
@@ -409,7 +422,10 @@ footer {
   <div class="about-text reveal">
     <h2 class="sec-title">NEXUS TOKYOとは</h2>
     <p>「起業したい」「何かやりたい」という気持ちを持った学生が集まるコミュニティです。</p>
-    <p>ビジネスの知識より先に、同じ熱量の仲間に出会うことが大事だと思っています。</p>
+    <div class="about-quote">
+      ビジネスの知識より先に、同じ熱量の仲間に出会うことが大事だと思っています。
+    </div>
+    <p>大学・学年・専攻問わず、つながりたいと思った人はいつでも歓迎です。</p>
     <div class="chips">
       <span class="chip">アイデアソン</span>
       <span class="chip">交流会</span>
