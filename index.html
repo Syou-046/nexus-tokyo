@@ -311,12 +311,61 @@ footer {
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
+/* ── ハンバーガーボタン ── */
+.nav-burger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 36px; height: 36px; cursor: pointer;
+  background: none; border: none; padding: 4px;
+}
+.nav-burger span {
+  display: block; height: 2px; border-radius: 2px;
+  background: var(--white);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── モバイルドロワー ── */
+.mobile-menu {
+  display: none;
+  position: fixed; inset: 0; top: 64px; z-index: 99;
+  background: rgba(13,13,31,0.97);
+  backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 2rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu a {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--white); text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--teal); }
+
 @media (max-width: 700px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .mobile-menu { display: flex; }
+
   .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .pillars-grid { grid-template-columns: 1fr; }
+  .about-panel { display: none; }
+
+  .pillars-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-cell:first-child { grid-column: span 2; }
-  .nav-links { display: none; }
+
+  .hero-title { font-size: clamp(2rem, 9vw, 3rem); }
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; text-align: center; }
+
+  section { padding: 3rem clamp(1rem, 5vw, 2rem); }
 }
 </style>
 </head>
@@ -331,7 +380,18 @@ footer {
     <li><a href="#gallery">ギャラリー</a></li>
     <li><a href="#contact">お問い合わせ</a></li>
   </ul>
+  <button class="nav-burger" id="burger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" class="mobile-link">について</a>
+  <a href="#pillars" class="mobile-link">活動</a>
+  <a href="#events" class="mobile-link">イベント</a>
+  <a href="#gallery" class="mobile-link">ギャラリー</a>
+  <a href="#contact" class="mobile-link">お問い合わせ</a>
+</div>
 
 <section id="hero">
   <div class="hero-glow hero-glow-1"></div>
@@ -487,6 +547,20 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   resize(); init(); draw();
   window.addEventListener('resize', ()=>{ resize(); init(); });
 })();
+
+// Hamburger menu
+const burger = document.getElementById('burger');
+const mobileMenu = document.getElementById('mobile-menu');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
 
 // Center section in viewport on nav click
 document.querySelectorAll('a[href^="#"]').forEach(link => {
