@@ -275,9 +275,20 @@ footer {
   <!-- 開催予定 -->
   <div class="tab-panel active" id="tab-upcoming">
     <div class="events-grid">
-      <div class="empty reveal">
-        <div class="empty-icon">📅</div>
-        <p>現在イベントを準備中です。<br>もうすぐお知らせします。</p>
+      <div class="event-card reveal" style="border-color: rgba(64,192,160,0.3);">
+        <div class="event-thumb" style="background: linear-gradient(135deg, rgba(64,192,160,0.15), rgba(32,160,224,0.1));">
+          <span class="status-badge badge-upcoming">COMING SOON</span>
+          ✨
+        </div>
+        <div class="event-body">
+          <p class="event-date">日時 近日公開</p>
+          <p class="event-name">イベント準備中</p>
+          <p class="event-desc">詳細は近日中にお知らせします。お楽しみに！</p>
+          <div class="event-footer">
+            <span class="event-loc">📍 場所 近日公開</span>
+            <span class="event-btn btn-past">詳細待ち</span>
+          </div>
+        </div>
       </div>
 
       <!-- イベントを追加するときはここにコピー
